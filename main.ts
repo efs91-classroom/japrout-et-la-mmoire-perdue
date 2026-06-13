@@ -35,6 +35,10 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
 function afficherMenu () {
     jeuLance = false
     scene.setBackgroundImage(assets.image`menu_fond`)
+    titre = textsprite.create("Japrout", 0, 2)
+    titre.setPosition(80, 15)
+    titre2 = textsprite.create("et la memoire perdue", 0, 2)
+    titre2.setPosition(80, 30)
     boutonJouer = sprites.create(assets.image`bouton_jouer`, SpriteKind.Player)
     boutonContinuer = sprites.create(assets.image`bouton_continuer`, SpriteKind.Player)
     boutonCredits = sprites.create(assets.image`bouton_credits`, SpriteKind.Player)
@@ -51,6 +55,8 @@ function lancerJeu () {
     boutonContinuer.destroy()
     boutonCredits.destroy()
     fleche.destroy()
+    titre.destroy()
+    titre2.destroy()
     scene.setBackgroundImage(null)
     game.showLongText("Je m'appelle...", DialogLayout.Center)
     game.showLongText("...", DialogLayout.Center)
@@ -62,15 +68,17 @@ function lancerJeu () {
     game.showLongText("Je dois retrouver ma mémoire.", DialogLayout.Center)
     tiles.setCurrentTilemap(tilemap`niveau 1`)
     Hero = sprites.create(assets.image`Hero epée haute drotie`, SpriteKind.Player)
-    Hero.sayText("Mais ou suis-je ??", 2000, false)
+    Hero.sayText("Mais où suis-je ??", 2000, false)
     scene.cameraFollowSprite(Hero)
     controller.moveSprite(Hero)
 }
 let boutonCredits: Sprite = null
 let boutonContinuer: Sprite = null
 let boutonJouer: Sprite = null
+let titre2: TextSprite = null
 let fleche: Sprite = null
 let choixMenu = 0
 let Hero: Sprite = null
 let jeuLance = false
+let titre: TextSprite = null
 afficherMenu()

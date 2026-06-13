@@ -2,7 +2,8 @@
     "name": "Japrout et la mémoire perdue",
     "description": "Projet du Groupe Programmation EFS 91",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0"
     },
     "files": [
         "main.blocks",
