@@ -1,6 +1,6 @@
 {
-    "name": "Japrout et la mémoire perdue_mod",
-    "description": "",
+    "name": "Japrout et la mémoire perdue",
+    "description": "Projet du Groupe Programmation EFS 91",
     "dependencies": {
         "device": "*"
     },
