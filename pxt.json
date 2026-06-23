@@ -3,7 +3,9 @@
     "description": "Projet du Groupe Programmation EFS 91",
     "dependencies": {
         "device": "*",
-        "arcade-text": "github:microsoft/arcade-text#v1.3.0"
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0",
+        "sprite-scaling": "*",
+        "multiplayer": "*"
     },
     "files": [
         "main.blocks",
