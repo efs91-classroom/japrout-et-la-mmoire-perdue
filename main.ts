@@ -217,6 +217,8 @@ let VY_garde_2 = 0
 let VX_garde_2 = 0
 let VY_garde_1 = 0
 let VX_garde_1 = 0
+let VY_derkill = 0
+let VX_derkill = 0
 let projectile_derkill: Sprite = null
 let projectile_garde_3: Sprite = null
 let projectile_garde_2: Sprite = null
@@ -275,6 +277,7 @@ game.onUpdate(function () {
         garde_1 = null
         max_vie = 4
         info.setLife(4)
+        pause(1000)
         game.showLongText("Un souvenir me revient...", DialogLayout.Center)
         game.showLongText("J'ai fait la guerre.", DialogLayout.Center)
         game.showLongText("J'ai perdu.", DialogLayout.Center)
@@ -284,6 +287,7 @@ game.onUpdate(function () {
         garde_2 = null
         max_vie = 5
         info.setLife(5)
+        pause(1000)
         game.showLongText("Un autre fragment...", DialogLayout.Center)
         game.showLongText("C'était dans le pays de Tar.", DialogLayout.Center)
         game.showLongText("Contre les Tarrés.", DialogLayout.Center)
@@ -293,6 +297,7 @@ game.onUpdate(function () {
         garde_3 = null
         max_vie = 6
         info.setLife(6)
+        pause(1000)
         game.showLongText("La vérité m'apparaît enfin...", DialogLayout.Center)
         game.showLongText("C'est Derkill qui m'a volé ma mémoire !", DialogLayout.Center)
         game.showLongText("Je dois le retrouver.", DialogLayout.Center)
@@ -302,19 +307,19 @@ game.onUpdate(function () {
     if (jeuLance && vie_derkill <= 0 && derkill) {
         sprites.destroy(derkill)
         derkill = null
-        max_vie = 7
-        info.setLife(7)
-        game.showLongText("Je me souviens de tout, maintenant.", DialogLayout.Center)
-        game.showLongText("Mon nom...", DialogLayout.Center)
-        game.showLongText("...c'est Japrout.", DialogLayout.Center)
-        game.showLongText("Et toi, Derkill...", DialogLayout.Center)
-        game.showLongText("Tu ne feras plus jamais de mal.", DialogLayout.Center)
-        game.showLongText("Victoire !", DialogLayout.Center)
-        game.showLongText("Le monde est sauvé. Fin du jeu.", DialogLayout.Center)
-        max_vie = 3
-        sprites.destroy(Hero)
-        Hero = null
-        afficherMenu()
+        control.runInParallel(function () {
+            max_vie = 7
+            info.setLife(7)
+            pause(1000)
+            game.showLongText("Je me souviens de tout, maintenant.", DialogLayout.Center)
+            game.showLongText("Mon nom...", DialogLayout.Center)
+            game.showLongText("...c'est Japrout.", DialogLayout.Center)
+            game.showLongText("Et toi, Derkill...", DialogLayout.Center)
+            game.showLongText("Tu ne feras plus jamais de mal.", DialogLayout.Center)
+            game.showLongText("Victoire !", DialogLayout.Center)
+            game.showLongText("Le monde est sauvé. Fin du jeu.", DialogLayout.Center)
+            game.reset()
+        })
     }
 })
 game.onUpdate(function () {
@@ -435,6 +440,18 @@ game.onUpdateInterval(500, function () {
                 garde_3.setVelocity(0, 0)
             }
         }
+        if (derkill) {
+            distance = Math.sqrt((Hero.x - derkill.x) * (Hero.x - derkill.x) + (Hero.y - derkill.y) * (Hero.y - derkill.y))
+            if (distance <= 150) {
+                derkill.setVelocity(VX_derkill, VY_derkill)
+                if (distance > 0 && distance < 25) {
+                    Hero.x += (Hero.x - derkill.x) / distance * 25
+                    Hero.y += (Hero.y - derkill.y) / distance * 25
+                }
+            } else {
+                derkill.setVelocity(0, 0)
+            }
+        }
     }
 })
 game.onUpdateInterval(3999, function () {
@@ -445,5 +462,7 @@ game.onUpdateInterval(3999, function () {
         VY_garde_2 = randint(-15, 15)
         VX_garde_3 = randint(-15, 15)
         VY_garde_3 = randint(-15, 15)
+        VX_derkill = randint(-30, 30)
+        VY_derkill = randint(-30, 30)
     }
 })
