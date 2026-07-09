@@ -170,8 +170,8 @@ let vitesse = 0
 let distance = 0
 let dy = 0
 let dx = 0
-let VX_garde_1 = 0
 let VY_garde_1 = 0
+let VX_garde_1 = 0
 let attaqueEnCours = false
 let titre2: TextSprite = null
 let titre: TextSprite = null
@@ -227,15 +227,15 @@ game.onUpdate(function () {
         }
     }
 })
-game.onUpdateInterval(4000, function () {
-    if (jeuLance && garde_1) {
-        VY_garde_1 = randint(-3, 3)
-        VX_garde_1 = randint(-3, 3)
-    }
-})
 game.onUpdateInterval(500, function () {
     if (jeuLance && garde_1) {
         garde_1.setVelocity(VX_garde_1, VY_garde_1)
+    }
+})
+game.onUpdateInterval(3999, function () {
+    if (jeuLance && garde_1) {
+        VY_garde_1 = randint(-3, 3)
+        VX_garde_1 = randint(-3, 3)
     }
 })
 game.onUpdateInterval(1200, function () {
